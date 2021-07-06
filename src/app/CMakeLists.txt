@@ -652,8 +652,8 @@ target_link_libraries(app-lib
   ${ZLIB_LIBRARIES}
   ${FREETYPE_LIBRARIES}
   ${HARFBUZZ_LIBRARIES}
+  ${LibArchive_LIBRARIES}
   json11
-  archive_static
   fmt
   tinyexpr)
 
