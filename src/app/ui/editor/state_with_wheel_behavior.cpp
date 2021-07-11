@@ -190,9 +190,22 @@ bool StateWithWheelBehavior::onMouseWheel(Editor* editor, MouseMessage* msg)
       ToolPreferences::Brush& brush =
         Preferences::instance().tool(tool).brush;
 
+      int newBrushSize;
+
+#if defined(_WIN32) || defined(__linux__)
+      dz = -dz;
+#endif
+
+      if (Preferences::instance().editor.invertBrushSizeScroll()){
+        newBrushSize = int(brush.size()-dz);
+      }
+      else{
+        newBrushSize = int(brush.size()+dz);
+      }
+
       brush.size(
         base::clamp(
-          int(brush.size()+dz),
+          newBrushSize,
           // If we use the "static const int" member directly here,
           // we'll get a linker error (when compiling without
           // optimizations) because we should need to define the
